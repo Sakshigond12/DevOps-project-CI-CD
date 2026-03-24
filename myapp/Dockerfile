@@ -1,27 +1,28 @@
-# Base image
 FROM node:18-bullseye-slim
 
 # Set working directory
 WORKDIR /app
 
-# Copy package.json files first (cache npm install)
+# Copy package.json
 COPY package*.json ./
 
-# Update OS packages and install dependencies
-RUN apt-get update && apt-get upgrade -y \
-    && apt-get install -y --only-upgrade libdb5.3 zlib1g \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install Node.js dependencies
+# Install npm dependencies
 RUN npm install
 
-# Copy application files
+# Update OS and fix vulnerable packages
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y --only-upgrade libdb5.3 zlib1g && \
+    rm -rf /var/lib/apt/lists/*
+
+# Copy app code
 COPY . .
 
 # Expose port
 EXPOSE 3000
 
 # Start app
-CMD ["node", "server.js"]
+CMD ["npm", "start"]
+
 
 
