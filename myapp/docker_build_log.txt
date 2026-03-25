@@ -1,0 +1,24 @@
+Sending build context to Docker daemon  193.5MB
+Step 1/7 : FROM node:18
+ ---> b50082bc3670
+Step 2/7 : WORKDIR /app
+ ---> Using cache
+ ---> 16802d446083
+Step 3/7 : COPY package.json .
+ ---> Using cache
+ ---> 5fac4741537b
+Step 4/7 : RUN npm install
+ ---> Using cache
+ ---> 5c68e22fd0e5
+Step 5/7 : COPY . .
+ ---> 1f6db43a91f9
+Step 6/7 : EXPOSE 3000
+ ---> Running in dbdcfc5e3d50
+ ---> Removed intermediate container dbdcfc5e3d50
+ ---> fffc7bf944e1
+Step 7/7 : CMD ["npm", "start"]
+ ---> Running in e9537c1ba9c6
+ ---> Removed intermediate container e9537c1ba9c6
+ ---> dbacf91661bf
+Successfully built dbacf91661bf
+Successfully tagged myapp:latest
